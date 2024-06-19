@@ -117,7 +117,7 @@ def main():
     # LISTBOX
     Label(data_frame, text="Loaded data A", font=FRAME_SUBLABEL_1, bg=DATA_FRAME_BACKGROUND).place(relx=0.16, rely=0.08, anchor=CENTER)
     loaded_data_a_scrollbar = tk.Scrollbar(data_frame)
-    loaded_data_a_scrollbar.place(relx=0.45, rely=0.25, anchor=CENTER, relheight=0.3)
+    loaded_data_a_scrollbar.place(relx=0.46, rely=0.25, anchor=CENTER, relheight=0.3)
     loaded_data_a_listbox = tk.Listbox(data_frame, yscrollcommand=loaded_data_a_scrollbar.set, width=30, height=10)
     loaded_data_a_listbox.place(relx=0.215, rely=0.25, width=120, anchor=CENTER)
     # SHOW ALL FILES in Listbox
@@ -138,7 +138,7 @@ def main():
     # LISTBOX
     Label(data_frame, text="Loaded data B", font=FRAME_SUBLABEL_1, bg=DATA_FRAME_BACKGROUND).place(relx=0.65, rely=0.08, anchor=CENTER)
     loaded_data_b_scrollbar = tk.Scrollbar(data_frame)
-    loaded_data_b_scrollbar.place(relx=0.94, rely=0.25, anchor=CENTER, relheight=0.3)
+    loaded_data_b_scrollbar.place(relx=0.95, rely=0.25, anchor=CENTER, relheight=0.3)
     loaded_data_b_listbox = tk.Listbox(data_frame, yscrollcommand=loaded_data_b_scrollbar.set, width=30, height=10)
     loaded_data_b_listbox.place(relx=0.705, rely=0.25, width=120, anchor=CENTER)
     # SHOW ALL FILES in Listbox
@@ -182,12 +182,13 @@ def main():
     # ----------------------------#
     # -------- IMAGE FRAME -------#
     # ----------------------------#
-    left_arrow_button = Button(image_frame, text="<", font=ARROW_FONT, bg=ARROW_BACKGROUND)
-    left_arrow_button.bind("<Button-1>", lambda x: data_manager.change_image('left', processed_data_listbox, image_frame))
-    left_arrow_button.place(relx=0.02, rely=0.5, anchor=CENTER)
-    right_arrow_button = Button(image_frame, text=">", font=ARROW_FONT, bg=ARROW_BACKGROUND)
-    right_arrow_button.bind("<Button-1>", lambda x: data_manager.change_image('right', processed_data_listbox, image_frame))
-    right_arrow_button.place(relx=0.98, rely=0.5, anchor=CENTER)
+    if processed_data_listbox.size() > 0:
+        left_arrow_button = Button(image_frame, text="<", font=ARROW_FONT, bg=ARROW_BACKGROUND)
+        left_arrow_button.bind("<Button-1>", lambda x: data_manager.change_image('left', processed_data_listbox, image_frame))
+        left_arrow_button.place(relx=0.02, rely=0.5, anchor=CENTER)
+        right_arrow_button = Button(image_frame, text=">", font=ARROW_FONT, bg=ARROW_BACKGROUND)
+        right_arrow_button.bind("<Button-1>", lambda x: data_manager.change_image('right', processed_data_listbox, image_frame))
+        right_arrow_button.place(relx=0.98, rely=0.5, anchor=CENTER)
 
     
 
