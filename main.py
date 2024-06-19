@@ -7,6 +7,7 @@ import os
 
 
 from data_manager import DataManager
+from processing_manager import ProcessingManager
 
 # ----------------------------------------------#
 # ----------------- CONSTANTS--------------------#
@@ -105,11 +106,9 @@ def main():
     data_manager = DataManager(root)
 
 
-
     # ----------------------------#
     # -------- DATA FRAME --------#
     # ----------------------------#
-
     
     #  -----------------------------LOADED DATA_a listbox------------------------------------------------ #
     #  -------------------------------------------------------------------------------------------------- #
@@ -125,12 +124,9 @@ def main():
     # SHOW ALL FILES in Listbox
     for data in loaded_data_a:
         loaded_data_a_listbox.insert(tk.END, data)
-
     # BUTTONS
     Button(data_frame, text="Load data", font=BUTTON_LABEL_A, command = lambda: data_manager.load_data_a(loaded_data_a_listbox)).place(relx=0.11, rely=0.43, anchor=CENTER)
     Button(data_frame, text="Delete data", font=BUTTON_LABEL_A, command=lambda: data_manager.delete_data_a(loaded_data_a_listbox)).place(relx=0.33, rely=0.43, anchor=CENTER)
-    Button(data_frame, width=15, text="Process", font=BUTTON_LABEL_B, bg=PROCESS_BUTTON_COLOR, command=lambda: data_manager.process_data(selection_2D_image, selection_2D_CT_scan, selection_FF, selection_4)).place(relx=0.66, rely=0.485, anchor=CENTER)
-    Button(data_frame, width=15, text="Reinitialize window", font=BUTTON_LABEL_B, bg=REINIT_BUTTON_COLOR, command=lambda: reinitialize(root)).place(relx=0.26, rely=0.485, anchor=CENTER)
    #  -------------------------------------------------------------------------------------------------- #
    #  -------------------------------------------------------------------------------------------------- #
 
@@ -158,13 +154,35 @@ def main():
 
     #  -----------------------------PROCESSED DATA listbox----------------------------------------------- #
     #  -------------------------------------------------------------------------------------------------- #
-    Label(data_frame, text="Processed data", font=FRAME_SUBLABEL_1, bg=DATA_FRAME_BACKGROUND).place(relx=0.19, rely=0.57, anchor=CENTER)
+    # DATA FOLDERS
+    results_folder = "./results"
+    results_data = os.listdir(results_folder)
 
+    Label(data_frame, text="Processed data", font=FRAME_SUBLABEL_1, bg=DATA_FRAME_BACKGROUND).place(relx=0.19, rely=0.57, anchor=CENTER)
     processed_data_scrollbar = tk.Scrollbar(data_frame)
     processed_data_scrollbar.place(relx=0.9, rely=0.75, anchor=CENTER, relheight=0.3)
     processed_data_listbox = tk.Listbox(data_frame, yscrollcommand=processed_data_scrollbar.set, width=30, height=10)
+    processed_data_listbox.bind("<Double-Button-1>", lambda x: processing_manager.open_file())
     processed_data_listbox.place(relx=0.42, rely=0.75, width=230, anchor=CENTER)
+    # SHOW ALL FILES in Listbox
+    for data in results_data:
+        processed_data_listbox.insert(tk.END, data)
+
+    
     #  -------------------------------------------------------------------------------------------------- #
+    #  -------------------------------------------------------------------------------------------------- #
+
+
+    # ----------------------------#
+    # ---------- CLASSES ---------#
+    # ----------------------------#
+    processing_manager = ProcessingManager(root, loaded_data_a_listbox, loaded_data_b_listbox, processed_data_listbox)
+
+    # PROCESS BUTTON
+    Button(data_frame, width=15, text="Process", font=BUTTON_LABEL_B, bg=PROCESS_BUTTON_COLOR, command=lambda: processing_manager.process_data(selection_2D_image, selection_2D_CT_scan, selection_FF, selection_4)).place(relx=0.66, rely=0.485, anchor=CENTER)
+    Button(data_frame, width=15, text="Reinitialize window", font=BUTTON_LABEL_B, bg=REINIT_BUTTON_COLOR, command=lambda: reinitialize(root)).place(relx=0.26, rely=0.485, anchor=CENTER)
+
+
 
 
 

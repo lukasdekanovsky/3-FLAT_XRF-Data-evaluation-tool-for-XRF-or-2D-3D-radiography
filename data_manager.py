@@ -1,7 +1,6 @@
 from tkinter import filedialog
 import tkinter as tk
 import shutil
-import datetime
 import os
 
 class DataManager():
@@ -36,17 +35,6 @@ class DataManager():
             # UPDATE LISTBOX FUNCTION
             self.update_listbox(loaded_data_a_listbox, self.data_a_path)
 
-    def delete_data_a(self, loaded_data_a_listbox):
-        print("A Deleting data procedure started")
-        file_list = os.listdir(self.data_a_path)
-        for file_name in file_list:
-            file_path = os.path.join(self.data_a_path, file_name)
-            if os.path.isfile(file_path):
-                os.remove(file_path)
-
-        # UPDATE LISTBOX FUNCTION
-        self.update_listbox(loaded_data_a_listbox, self.data_a_path)
-
     def load_data_b(self, loaded_data_b_listbox):
         print("B Loading data procedure started")
         file_paths = filedialog.askopenfilenames(initialdir = "/", title = "Select data A folder", filetypes=(("Text files", "*.txt"), ("all files", "*.*")))
@@ -59,6 +47,17 @@ class DataManager():
             # UPDATE LISTBOX FUNCTION
             self.update_listbox(loaded_data_b_listbox, self.data_b_path)
 
+    def delete_data_a(self, loaded_data_a_listbox):
+        print("A Deleting data procedure started")
+        file_list = os.listdir(self.data_a_path)
+        for file_name in file_list:
+            file_path = os.path.join(self.data_a_path, file_name)
+            if os.path.isfile(file_path):
+                os.remove(file_path)
+
+        # UPDATE LISTBOX FUNCTION
+        self.update_listbox(loaded_data_a_listbox, self.data_a_path)
+
     def delete_data_b(self, loaded_data_b_listbox):
         print("B Deleting data procedure started")
         file_list = os.listdir(self.data_b_path)
@@ -70,22 +69,5 @@ class DataManager():
         # UPDATE LISTBOX FUNCTION
         self.update_listbox(loaded_data_b_listbox, self.data_a_path)
 
-    # --------------------------------------------------------------------#
-    # ---------------------- DATA PROCESSING------------------------------#
-    # --------------------------------------------------------------------#
-
-    def process_data(self, selection_2D_image, selection_2D_CT_scan, selection_FF, selection_4):
-        # DATA processing according to selection
-        processes = [selection_2D_image, selection_2D_CT_scan, selection_FF, selection_4]
-        if selection_2D_image.get():
-            print("Processing 2D image")
-            self.proces_2D_image()
-        elif selection_2D_CT_scan.get():
-            ...
-        elif selection_FF.get():
-            ...
-        elif selection_4.get():
-            ...
-        
-    def proces_2D_image(self):
-        ...
+    
+    
