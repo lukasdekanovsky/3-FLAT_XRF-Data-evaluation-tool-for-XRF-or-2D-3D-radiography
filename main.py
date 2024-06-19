@@ -3,6 +3,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import filedialog
+from tkinter import PhotoImage, Label
 import os
 
 
@@ -21,6 +22,7 @@ EXPORT_FRAME_BACKGROUND = "#E0EEEE"
 PROCESS_BUTTON_COLOR = "#FFB6C1"
 PROCESS_BUTTON_COLOR = "#FFB6C1"
 REINIT_BUTTON_COLOR = "#FFEC8B"
+IMAGE_BUTTON_COLOR = "#FFB6C1"
 
 LOGO_FONT = ('Helvetica', 20, "bold")
 FRAME_LABELS = ('Helvetica', 10, "bold")
@@ -99,9 +101,6 @@ def main():
     # ---> selection_2D_image.get()  ZISKAVAME TRUE/FALSE HODNOTU Z CHEKCBOXU
 
 
-    # ----------------------------#
-    # ---------- CLASSES ---------#
-    # ----------------------------#
     # class instances as managers
     data_manager = DataManager(root)
 
@@ -173,18 +172,16 @@ def main():
     #  -------------------------------------------------------------------------------------------------- #
     #  -------------------------------------------------------------------------------------------------- #
 
-
-    # ----------------------------#
-    # ---------- CLASSES ---------#
-    # ----------------------------#
     processing_manager = ProcessingManager(root, loaded_data_a_listbox, loaded_data_b_listbox, processed_data_listbox)
 
     # PROCESS BUTTON
     Button(data_frame, width=15, text="Process", font=BUTTON_LABEL_B, bg=PROCESS_BUTTON_COLOR, command=lambda: processing_manager.process_data(selection_2D_image, selection_2D_CT_scan, selection_FF, selection_4)).place(relx=0.66, rely=0.485, anchor=CENTER)
     Button(data_frame, width=15, text="Reinitialize window", font=BUTTON_LABEL_B, bg=REINIT_BUTTON_COLOR, command=lambda: reinitialize(root)).place(relx=0.26, rely=0.485, anchor=CENTER)
+    Button(data_frame, width=15, text="Open in frame", font=BUTTON_LABEL_B, bg=IMAGE_BUTTON_COLOR, command=lambda: data_manager.image_to_frame(image_frame, processed_data_listbox)).place(relx=0.26, rely=0.93, anchor=CENTER)
 
-
-
+    # ----------------------------#
+    # -------- IMAGE FRAME --------#
+    # ----------------------------#
 
 
 

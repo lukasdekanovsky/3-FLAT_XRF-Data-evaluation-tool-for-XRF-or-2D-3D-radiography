@@ -1,5 +1,7 @@
 from tkinter import filedialog
+from PIL import Image, ImageTk
 import tkinter as tk
+from tkinter import PhotoImage, Label
 import shutil
 import os
 
@@ -80,5 +82,24 @@ class DataManager():
         # UPDATE LISTBOX FUNCTION
         self.update_listbox(processed_data_listbox, self.results_path)
 
-    
-    
+    # --------------------------------------------------------------------#
+    # ----------- RESULTS DATA --> IMAGE FRAME transport------------------#
+    # --------------------------------------------------------------------#
+
+    def image_to_frame(self, image_frame,  processed_data_listbox):
+        index = processed_data_listbox.curselection()[0]                      # Get selected line index
+        filename = processed_data_listbox.get(index)                          # Get the line's text
+        file_path = os.path.abspath(os.path.join(self.results_path, filename))     # Get the absolute file path
+
+        # IMAGE RESIZE logic to the frame size
+        img = Image.open(file_path)
+        frame_width = image_frame.winfo_width()
+        frame_height = image_frame.winfo_height()
+
+        img = img.resize((frame_width, frame_height))
+
+        photo = ImageTk.PhotoImage(img)
+
+        image_label = Label(self.root, image=photo)
+        image_label.image = photo
+        image_label.grid(row=2, column=1)
