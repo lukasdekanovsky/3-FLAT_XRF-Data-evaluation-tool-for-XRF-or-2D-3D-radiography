@@ -182,13 +182,13 @@ def main():
     # ----------------------------#
     # -------- IMAGE FRAME -------#
     # ----------------------------#
-    if processed_data_listbox.size() > 0:
-        left_arrow_button = Button(image_frame, text="<", font=ARROW_FONT, bg=ARROW_BACKGROUND)
-        left_arrow_button.bind("<Button-1>", lambda x: data_manager.change_image('left', processed_data_listbox, image_frame))
-        left_arrow_button.place(relx=0.02, rely=0.5, anchor=CENTER)
-        right_arrow_button = Button(image_frame, text=">", font=ARROW_FONT, bg=ARROW_BACKGROUND)
-        right_arrow_button.bind("<Button-1>", lambda x: data_manager.change_image('right', processed_data_listbox, image_frame))
-        right_arrow_button.place(relx=0.98, rely=0.5, anchor=CENTER)
+    #if processed_data_listbox.size() > 0:
+    left_arrow_button = Button(image_frame, text="<", font=ARROW_FONT, bg=ARROW_BACKGROUND)
+    left_arrow_button.bind("<Button-1>", lambda x: data_manager.change_image('left', processed_data_listbox, image_frame))
+    left_arrow_button.place(relx=0.02, rely=0.5, anchor=CENTER)
+    right_arrow_button = Button(image_frame, text=">", font=ARROW_FONT, bg=ARROW_BACKGROUND)
+    right_arrow_button.bind("<Button-1>", lambda x: data_manager.change_image('right', processed_data_listbox, image_frame))
+    right_arrow_button.place(relx=0.98, rely=0.5, anchor=CENTER)
 
     
 
