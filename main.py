@@ -167,7 +167,8 @@ def main():
     # SHOW ALL FILES in Listbox
     for data in results_data:
         processed_data_listbox.insert(tk.END, data)
-
+    # BUTTONS
+    Button(data_frame, text="Clear results", font=BUTTON_LABEL_A, command=lambda: data_manager.delete_data_results(processed_data_listbox)).place(relx=0.13, rely=0.93, anchor=CENTER)
     
     #  -------------------------------------------------------------------------------------------------- #
     #  -------------------------------------------------------------------------------------------------- #

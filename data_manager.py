@@ -69,5 +69,16 @@ class DataManager():
         # UPDATE LISTBOX FUNCTION
         self.update_listbox(loaded_data_b_listbox, self.data_a_path)
 
+    def delete_data_results(self, processed_data_listbox):
+        print("Deleting results procedure started")
+        file_list = os.listdir(self.results_path)
+        for file_name in file_list:
+            file_path = os.path.join(self.results_path, file_name)
+            if os.path.isfile(file_path):
+                os.remove(file_path)
+        
+        # UPDATE LISTBOX FUNCTION
+        self.update_listbox(processed_data_listbox, self.results_path)
+
     
     
