@@ -81,7 +81,6 @@ class ProcessingManager():
         img = ax.imshow(pixel_values, cmap='viridis')                           # plot the pixel values as an image
         cbar = fig.colorbar(img)                                                # add a colorbar to the image
         
-
         # adjust th evisual properties of the graph
         ax.set_title('Pixel Values')
         ax.set_xlabel('X')

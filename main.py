@@ -23,6 +23,7 @@ PROCESS_BUTTON_COLOR = "#FFB6C1"
 PROCESS_BUTTON_COLOR = "#FFB6C1"
 REINIT_BUTTON_COLOR = "#FFEC8B"
 IMAGE_BUTTON_COLOR = "#7FFFD4"
+ARROW_BACKGROUND = "white"
 
 LOGO_FONT = ('Helvetica', 20, "bold")
 FRAME_LABELS = ('Helvetica', 10, "bold")
@@ -33,16 +34,14 @@ BUTTON_LABEL_A = ('Helvetica', 8)
 BUTTON_LABEL_B = ('Helvetica', 9)
 BUTTON_LABEL_B = ('Helvetica', 9)
 BUTTON_LABEL_C = ('Helvetica', 10)
+ARROW_FONT = ('Helvetica', 10, "bold")
 
 # ----------------------------------------------#
-# ----------------- FUNCTIONS-------------------#
+# ----------------- FUNCTIONS ------------------#
 # ----------------------------------------------#
 def reinitialize(root):
     root.destroy()
     main()
-
-
-
 
 # ----------------------------------------------#
 # ----------------- UI-SETUP--------------------#
@@ -169,7 +168,6 @@ def main():
         processed_data_listbox.insert(tk.END, data)
     # BUTTONS
     Button(data_frame, text="Clear results", font=BUTTON_LABEL_A, command=lambda: data_manager.delete_data_results(processed_data_listbox)).place(relx=0.15, rely=0.94, anchor=CENTER)
-    
     #  -------------------------------------------------------------------------------------------------- #
     #  -------------------------------------------------------------------------------------------------- #
 
@@ -180,10 +178,18 @@ def main():
     Button(data_frame, width=15, text="Reinitialize window", font=BUTTON_LABEL_B, bg=REINIT_BUTTON_COLOR, command=lambda: reinitialize(root)).place(relx=0.26, rely=0.485, anchor=CENTER)
     Button(data_frame, width=15, text="Open in frame", font=BUTTON_LABEL_C, bg=IMAGE_BUTTON_COLOR, command=lambda: data_manager.image_to_frame(image_frame, processed_data_listbox)).place(relx=0.58, rely=0.94, anchor=CENTER)
 
-    # ----------------------------#
-    # -------- IMAGE FRAME --------#
-    # ----------------------------#
 
+    # ----------------------------#
+    # -------- IMAGE FRAME -------#
+    # ----------------------------#
+    left_arrow_button = Button(image_frame, text="<", font=ARROW_FONT, bg=ARROW_BACKGROUND)
+    left_arrow_button.bind("<Button-1>", lambda x: data_manager.change_image('left', processed_data_listbox, image_frame))
+    left_arrow_button.place(relx=0.02, rely=0.5, anchor=CENTER)
+    right_arrow_button = Button(image_frame, text=">", font=ARROW_FONT, bg=ARROW_BACKGROUND)
+    right_arrow_button.bind("<Button-1>", lambda x: data_manager.change_image('right', processed_data_listbox, image_frame))
+    right_arrow_button.place(relx=0.98, rely=0.5, anchor=CENTER)
+
+    
 
 
     root.mainloop()                     # start the main loop of the window

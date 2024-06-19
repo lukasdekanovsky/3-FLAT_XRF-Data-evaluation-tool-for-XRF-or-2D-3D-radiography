@@ -18,10 +18,8 @@ class DataManager():
         self.data_b_path = "./data_b/"
         self.results_path = "./results/"
         self.root = root
+        self.current_image_index = 0
 
-    # --------------------------------------------------------------------#
-    # --------------------- DATA LOAD/DELETE------------------------------#
-    # --------------------------------------------------------------------#
 
     def update_listbox(self, loaded_listbox, path):
         # UPDATE LISTBOX FUNCTION
@@ -30,7 +28,28 @@ class DataManager():
             loaded_listbox.insert(tk.END, file_name)
         loaded_listbox.update()
 
-    
+    def change_image(self, direction, processed_data_listbox, image_frame):
+        
+        current_index = processed_data_listbox.curselection()[0]        # Get the current selection index
+        
+        total_items = processed_data_listbox.size()                     # Get the total number of items in the listbox
+        
+        if direction == "right":                                        # Calculate the new index based on the direction
+            new_index = (current_index + 1) % total_items
+        elif direction == "left":
+            new_index = (current_index - 1) % total_items
+        
+        processed_data_listbox.selection_clear(current_index)           # Update the selection in the listbox
+        processed_data_listbox.selection_set(new_index)
+        processed_data_listbox.activate(new_index)
+        
+        self.image_to_frame(image_frame, processed_data_listbox)        # Call the image_to_frame function to display the new image
+
+
+    # --------------------------------------------------------------------#
+    # --------------------- DATA LOAD/DELETE------------------------------#
+    # --------------------------------------------------------------------#
+
     def load_data_a(self, loaded_data_a_listbox):
         print("A Loading data procedure started")
         file_paths = filedialog.askopenfilenames(initialdir = "/", title = "Select data A folder", filetypes=(("Text files", "*.txt"), ("all files", "*.*")))
@@ -119,3 +138,5 @@ class DataManager():
         image_label = Label(self.root, image=photo)
         image_label.image = photo
         image_label.grid(row=2, column=1)
+
+        
