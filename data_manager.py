@@ -5,6 +5,12 @@ from tkinter import PhotoImage, Label
 import shutil
 import os
 
+
+
+IMAGE_FRAME_RATIO = 0.9
+
+
+
 class DataManager():
 
     def __init__(self, root):
@@ -69,7 +75,7 @@ class DataManager():
                 os.remove(file_path)
         
         # UPDATE LISTBOX FUNCTION
-        self.update_listbox(loaded_data_b_listbox, self.data_a_path)
+        self.update_listbox(loaded_data_b_listbox, self.data_b_path)
 
     def delete_data_results(self, processed_data_listbox):
         print("Deleting results procedure started")
@@ -95,8 +101,18 @@ class DataManager():
         img = Image.open(file_path)
         frame_width = image_frame.winfo_width()
         frame_height = image_frame.winfo_height()
+        #----
+        img_ratio = img.width / img.height
+        frame_ratio = frame_width / frame_height
 
-        img = img.resize((frame_width, frame_height))
+        if frame_ratio > img_ratio:
+            width = int(frame_height * img_ratio * IMAGE_FRAME_RATIO)
+            height = int(frame_height * IMAGE_FRAME_RATIO)
+        else:
+            width = int(frame_width * IMAGE_FRAME_RATIO)
+            height = int(frame_width / img_ratio * IMAGE_FRAME_RATIO)
+        #----
+        img = img.resize((width, height))
 
         photo = ImageTk.PhotoImage(img)
 

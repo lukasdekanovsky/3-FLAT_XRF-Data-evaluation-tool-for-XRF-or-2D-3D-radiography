@@ -22,7 +22,7 @@ EXPORT_FRAME_BACKGROUND = "#E0EEEE"
 PROCESS_BUTTON_COLOR = "#FFB6C1"
 PROCESS_BUTTON_COLOR = "#FFB6C1"
 REINIT_BUTTON_COLOR = "#FFEC8B"
-IMAGE_BUTTON_COLOR = "#FFB6C1"
+IMAGE_BUTTON_COLOR = "#7FFFD4"
 
 LOGO_FONT = ('Helvetica', 20, "bold")
 FRAME_LABELS = ('Helvetica', 10, "bold")
@@ -32,6 +32,7 @@ FRAME_SUBLABEL_1 = ('Helvetica', 10)
 BUTTON_LABEL_A = ('Helvetica', 8)
 BUTTON_LABEL_B = ('Helvetica', 9)
 BUTTON_LABEL_B = ('Helvetica', 9)
+BUTTON_LABEL_C = ('Helvetica', 10)
 
 # ----------------------------------------------#
 # ----------------- FUNCTIONS-------------------#
@@ -82,7 +83,7 @@ def main():
     Label(logo_frame, text="lukasdekanovsky@gmail.com", font=AUTHOR_LABEL, bg=LOGO_FRAME_BACKGROUND).place(relx=0.84, rely=0.85, anchor=CENTER)
     Label(processing_frame, text="Processing selection", font=FRAME_LABELS, bg=PROCESSING_FRAME_BACKGROUND).place(relx=0.5, rely=0.13, anchor=CENTER)
     Label(data_frame, text="Data", font=FRAME_LABELS, bg=DATA_FRAME_BACKGROUND).place(relx=0.5, rely=0.02, anchor=CENTER)
-    Label(image_frame, text="Image", font=FRAME_LABELS, bg=IMAGE_FRAME_BACKGROUND).place(relx=0.5, rely=0.022, anchor=CENTER)
+    Label(image_frame, text="Image frame", font=FRAME_LABELS, bg=IMAGE_FRAME_BACKGROUND).place(relx=0.5, rely=0.022, anchor=CENTER)
     Label(export_frame, text="Export", font=FRAME_LABELS, bg=EXPORT_FRAME_BACKGROUND).place(relx=0.05, rely=0.5, anchor=CENTER)
 
 
@@ -167,7 +168,7 @@ def main():
     for data in results_data:
         processed_data_listbox.insert(tk.END, data)
     # BUTTONS
-    Button(data_frame, text="Clear results", font=BUTTON_LABEL_A, command=lambda: data_manager.delete_data_results(processed_data_listbox)).place(relx=0.13, rely=0.93, anchor=CENTER)
+    Button(data_frame, text="Clear results", font=BUTTON_LABEL_A, command=lambda: data_manager.delete_data_results(processed_data_listbox)).place(relx=0.15, rely=0.94, anchor=CENTER)
     
     #  -------------------------------------------------------------------------------------------------- #
     #  -------------------------------------------------------------------------------------------------- #
@@ -177,7 +178,7 @@ def main():
     # PROCESS BUTTON
     Button(data_frame, width=15, text="Process", font=BUTTON_LABEL_B, bg=PROCESS_BUTTON_COLOR, command=lambda: processing_manager.process_data(selection_2D_image, selection_2D_CT_scan, selection_FF, selection_4)).place(relx=0.66, rely=0.485, anchor=CENTER)
     Button(data_frame, width=15, text="Reinitialize window", font=BUTTON_LABEL_B, bg=REINIT_BUTTON_COLOR, command=lambda: reinitialize(root)).place(relx=0.26, rely=0.485, anchor=CENTER)
-    Button(data_frame, width=15, text="Open in frame", font=BUTTON_LABEL_B, bg=IMAGE_BUTTON_COLOR, command=lambda: data_manager.image_to_frame(image_frame, processed_data_listbox)).place(relx=0.26, rely=0.93, anchor=CENTER)
+    Button(data_frame, width=15, text="Open in frame", font=BUTTON_LABEL_C, bg=IMAGE_BUTTON_COLOR, command=lambda: data_manager.image_to_frame(image_frame, processed_data_listbox)).place(relx=0.58, rely=0.94, anchor=CENTER)
 
     # ----------------------------#
     # -------- IMAGE FRAME --------#
